@@ -1,6 +1,5 @@
 package one.oktw;
 
-import com.google.common.net.InetAddresses;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.minecraft.util.Identifier;
@@ -8,7 +7,9 @@ import net.minecraft.util.PacketByteBuf;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,7 +45,12 @@ public class VelocityProxy {
     }
 
     public static InetAddress readAddress(final PacketByteBuf buf) {
-        return InetAddresses.forString(buf.readString(Short.MAX_VALUE));
+        final String s = buf.readString(Short.MAX_VALUE);
+        try {
+			return InetAddress.getByName(s);
+		} catch (UnknownHostException e) {
+            throw new IllegalArgumentException("Invalid address", e);
+		}
     }
 
     public static GameProfile createProfile(final PacketByteBuf buf) {

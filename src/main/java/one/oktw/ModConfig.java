@@ -1,16 +1,12 @@
 package one.oktw;
 
-import me.sargunvohra.mcmods.autoconfig1.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1.annotation.Config;
-import me.sargunvohra.mcmods.autoconfig1.shadowed.blue.endless.jankson.Comment;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-@SuppressWarnings("FieldCanBeLocal")
-@Config(name = "FabricProxy")
-public class ModConfig implements ConfigData {
-    private Boolean BungeeCord = false;
-    private Boolean Velocity = false;
-
-    @Comment("Velocity proxy secret")
+public class ModConfig {
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private boolean BungeeCord = false;
+    private boolean Velocity = false;
     private String secret = "";
 
     public Boolean getVelocity() {
