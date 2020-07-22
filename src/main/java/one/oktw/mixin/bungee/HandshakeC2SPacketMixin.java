@@ -1,15 +1,12 @@
 package one.oktw.mixin.bungee;
 
 import net.minecraft.network.packet.c2s.handshake.HandshakeC2SPacket;
-import net.minecraft.util.PacketByteBuf;
 import one.oktw.FabricProxy;
 import one.oktw.interfaces.IHandshakeC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(HandshakeC2SPacket.class)
 public abstract class HandshakeC2SPacketMixin implements IHandshakeC2SPacket {

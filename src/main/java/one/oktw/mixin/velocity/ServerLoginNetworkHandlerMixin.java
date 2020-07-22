@@ -29,7 +29,7 @@ import static io.netty.buffer.Unpooled.EMPTY_BUFFER;
 public abstract class ServerLoginNetworkHandlerMixin {
     @Shadow
     @Final
-    public ClientConnection client;
+    public ClientConnection connection;
     private int velocityLoginQueryId = -1;
     private boolean ready = false;
     @Shadow
@@ -60,7 +60,7 @@ public abstract class ServerLoginNetworkHandlerMixin {
             ((ILoginQueryRequestS2CPacket) packet).setChannel(VelocityProxy.PLAYER_INFO_CHANNEL);
             ((ILoginQueryRequestS2CPacket) packet).setPayload(new PacketByteBuf(EMPTY_BUFFER));
 
-            client.send(packet);
+            connection.send(packet);
             ci.cancel();
         }
     }
@@ -79,7 +79,7 @@ public abstract class ServerLoginNetworkHandlerMixin {
                 return;
             }
 
-            ((IClientConnection) client).setRemoteAddress(new java.net.InetSocketAddress(VelocityProxy.readAddress(buf), ((java.net.InetSocketAddress) client.getAddress()).getPort()));
+            ((IClientConnection) connection).setRemoteAddress(new java.net.InetSocketAddress(VelocityProxy.readAddress(buf), ((java.net.InetSocketAddress) connection.getAddress()).getPort()));
 
             profile = VelocityProxy.createProfile(buf);
 

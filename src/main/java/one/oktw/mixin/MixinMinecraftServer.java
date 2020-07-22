@@ -3,6 +3,7 @@ package one.oktw.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.server.MinecraftServer;
 import one.oktw.FabricProxy;
@@ -14,7 +15,7 @@ public class MixinMinecraftServer {
         target = "Lnet/minecraft/server/PlayerManager;saveAllPlayerData()V",
         shift = At.Shift.BEFORE
     ))
-    private void onReload(){
+    private void onReload(CallbackInfo ci){
         FabricProxy.loadConfig();
     }
 }
